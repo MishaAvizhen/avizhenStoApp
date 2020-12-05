@@ -1,8 +1,6 @@
 package com.avizhen.avizhenSto.entity;
 
 import com.avizhen.avizhenSto.constants.RoleConstants;
-import com.sun.istack.internal.NotNull;
-
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,27 +15,21 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @NotNull
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @NotNull
     @Column(name = "user_role", nullable = false)
     private String userRole;
 
-    @NotNull
     @Column(name = "login", nullable = false)
     private String login;
 
-    @NotNull
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -52,7 +44,7 @@ public class User {
         this.repairRequestList = repairRequestList;
     }
 
-    public User(){
+    public User() {
 
     }
 
@@ -106,10 +98,9 @@ public class User {
         this.userRole = userRole;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return RoleConstants.ADMIN_ROLE.equals(this.userRole);
     }
-
 
 
     public String getLogin() {

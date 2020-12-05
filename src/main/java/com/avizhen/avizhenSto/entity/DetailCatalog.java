@@ -1,7 +1,5 @@
 package com.avizhen.avizhenSto.entity;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,15 +11,12 @@ public class DetailCatalog {
     @Column(name = "id")
     private Integer id;
 
-    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
     @Column(name = "description", nullable = false)
     private String description;
 
-    @NotNull
     @Column(name = "price", nullable = false)
     private String price;
 

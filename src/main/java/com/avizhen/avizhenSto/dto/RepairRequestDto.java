@@ -1,8 +1,5 @@
 package com.avizhen.avizhenSto.dto;
 
-import com.sun.istack.internal.NotNull;
-
-import javax.persistence.Column;
 import java.util.Date;
 
 /**

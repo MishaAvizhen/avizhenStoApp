@@ -1,9 +1,6 @@
 package com.avizhen.avizhenSto.entity;
 
 
-
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -22,28 +19,22 @@ public class RepairRequest {
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "repairRequest", fetch = FetchType.EAGER)
     private RepairRecord repairRecord;
 
-
-
-    @NotNull
     @Column(name = "date_of_repair", nullable = false)
     private Date dateOfRepair;
 
-    @NotNull
     @Column(name = "status", nullable = false)
     private String status;
 
-    @NotNull
     @Column(name = "car_remark", nullable = true)
     private String carRemark;
 
-    @NotNull
     @Column(name = "repair_description", nullable = true)
     private String repairDescription;
 
-    public RepairRequest(){
+    public RepairRequest() {
     }
 
-    public RepairRequest( Date dateOfRepair, String status, String carRemark, String repairDescription) {
+    public RepairRequest(Date dateOfRepair, String status, String carRemark, String repairDescription) {
 
         this.dateOfRepair = dateOfRepair;
         this.status = status;

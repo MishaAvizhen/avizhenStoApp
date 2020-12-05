@@ -17,7 +17,6 @@ public class DetailCatalogDaoImp extends AbstractDao implements DetailCatalogDao
     @Override
     public void saveDetailCatalog(DetailCatalog detailCatalog) {
         persist(detailCatalog);
-
     }
 
     @Override
