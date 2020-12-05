@@ -85,7 +85,7 @@ public class UserController extends CommonInitSessionControler {
 
         return showWelcomePage(model);
     }
-    //security feature
+    //security feature test
 
     @RequestMapping(value = "/repairRequest", method = RequestMethod.GET)
     public String goToRepairRequestPage(ModelMap model) {
