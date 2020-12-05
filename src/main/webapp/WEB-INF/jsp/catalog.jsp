@@ -37,7 +37,8 @@
                 <li><a href="/allRepairRequests">All repairs Requests</a></li>
                 <li class="active"><a href="/catalog">Catalog</a></li>
                 <c:if test="${currentUser.admin}">
-                    <li><a href="/allRepRecordAndRepRequestList" style="color:rgb(248, 239, 53);">All Repair Records</a></li>
+                    <li><a href="/allRepRecordAndRepRequestList" style="color:rgb(248, 239, 53);">All Repair Records</a>
+                    </li>
                 </c:if>
             </ul>
         </div>
@@ -98,15 +99,15 @@
                                        role="button">Delete</a>
 
                                     <c:if test="${currentUser.id != 0}">
-                                    <button type="button" class="btn btn-success addToCart"
-                                            detailId="${catalogDetail.id}">Add to cart with ajax
-                                    </button>
-                                    <button type="button" class="btn btn-danger deleteDetailFromCatalog"
-                                            detailIdToDelete="${catalogDetail.id}">Delete with ajax
-                                    </button>
-                                    <a href="/editDetailInCatalog/${catalogDetail.id}" id="editDetailInCatalog"
-                                       class="btn btn-info "
-                                       role="button">Edit</a>
+                                        <button type="button" class="btn btn-success addToCart"
+                                                detailId="${catalogDetail.id}">Add to cart with ajax
+                                        </button>
+                                        <button type="button" class="btn btn-danger deleteDetailFromCatalog"
+                                                detailIdToDelete="${catalogDetail.id}">Delete with ajax
+                                        </button>
+                                        <a href="/editDetailInCatalog/${catalogDetail.id}" id="editDetailInCatalog"
+                                           class="btn btn-info "
+                                           role="button">Edit</a>
                                     </c:if>
                                 </div>
                                 <hr>
@@ -120,8 +121,30 @@
         <div class="col-md-4 col-lg-3">
             <a href="/addDetailToCatalog" class="btn btn-success  "
                role="button">Add detail to catalog</a>
-            <p>Backend info: ${catalogMsg}</p>
+            <hr>
 
+            <h4 class="font-weight-bold mb-3">Price:</h4>
+            <div>
+                <form class="navbar-form" method="post" action="/filterByPrice">
+                    <div class="form-group">
+                        <input type="text" placeholder=" Min: BYN" name="minPrice" class="form-control input-sm"
+                               size="7">
+                    </div>
+                    -
+                    <div class="form-group">
+                        <input type="text" placeholder=" Max: BYN" name="maxPrice" class="form-control input-sm"
+                               size="7">
+                    </div>
+                    <div>
+                        <br>
+                        <span><input type="submit" value="Accept" class="btn btn-info"></span>
+                        <span><a href="/catalog" class="btn btn-danger" role="button">Clear</a></span>
+                    </div>
+                </form>
+            </div>
+            <!-- Section: Price -->
+            <hr>
+            <p>Backend info: ${catalogMsg}</p>
         </div>
 
 

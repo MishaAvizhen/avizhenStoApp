@@ -8,7 +8,7 @@ import java.util.List;
 public interface DetailCatalogDao {
     void saveDetailCatalog(DetailCatalog detailCatalog);
 
-    List<DetailCatalog> findAllCarts();
+    List<DetailCatalog> findAllDetails();
 
     void deleteDetailCatalogById(int id);
 

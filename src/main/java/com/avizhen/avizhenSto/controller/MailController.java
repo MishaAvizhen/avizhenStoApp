@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MailController {
 
     @Autowired
-    public JavaMailSender emailSender;
+    private JavaMailSender emailSender;
 
     @ResponseBody
     @RequestMapping("/sendSimpleEmail")

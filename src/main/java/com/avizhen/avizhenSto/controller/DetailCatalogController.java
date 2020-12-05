@@ -4,7 +4,6 @@ import com.avizhen.avizhenSto.dao.DetailCatalogDao;
 import com.avizhen.avizhenSto.dto.DetailCatalogDto;
 import com.avizhen.avizhenSto.entity.DetailCatalog;
 import com.avizhen.avizhenSto.entity.User;
-import com.avizhen.avizhenSto.exception.InvalidAddToCatalogException;
 import com.avizhen.avizhenSto.service.DetailCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,31 +17,26 @@ import java.util.List;
 @SessionAttributes({"currentUser", "cart"})
 public class DetailCatalogController extends CommonInitSessionControler {
     @Autowired
-    DetailCatalogService detailCatalogService;
+    private DetailCatalogService detailCatalogService;
     @Autowired
-    DetailCatalogDao detailCatalogDao;
+    private DetailCatalogDao detailCatalogDao;
 
 
     @RequestMapping(value = "/catalog", method = RequestMethod.GET)
     public ModelAndView goToCatalog(ModelMap model) {
         initSession(model);
         List<DetailCatalog> detailCatalogList = detailCatalogService.getListOfAllDetailCatalogElements();
-
-        model.addAttribute("catalog", detailCatalogList);
-        return new ModelAndView("catalog", model);
+        return goToCatalogWithDetails(model, detailCatalogList);
     }
 
     @RequestMapping(value = "/addDetailToCart/{detailId}", method = RequestMethod.GET)
     public ModelAndView addDetailToCart(ModelMap model, @PathVariable Integer detailId,
                                         @ModelAttribute("cart") List<Integer> cartDetailIds,
                                         @ModelAttribute("currentUser") User currentUser) {
-        if (currentUser.getId()!=0) {
         initSession(model);
-        cartDetailIds.add(detailId);
-        List<DetailCatalog> detailCatalogList = detailCatalogService.getListOfAllDetailCatalogElements();
-        model.addAttribute("catalog", detailCatalogList);
-        }
-        else {
+        if (currentUser.getId() != 0) {
+            cartDetailIds.add(detailId);
+        } else {
             model.addAttribute("catalogMsg", "Please, login to continue");
         }
         return goToCatalog(model);
@@ -74,8 +68,7 @@ public class DetailCatalogController extends CommonInitSessionControler {
             detailCatalogDao.deleteDetailCatalogById(detailId);
             model.addAttribute("catalogMsg", "Detail was remove from catalog");
 
-        }
-        else {
+        } else {
             model.addAttribute("catalogMsg", "Error, please login as admin!");
         }
         return goToCatalog(model);
@@ -112,7 +105,7 @@ public class DetailCatalogController extends CommonInitSessionControler {
                                         @RequestParam("name") String name,
                                         @RequestParam("description") String description,
                                         @RequestParam("price") String price,
-                                        @RequestParam ("detailIdInCatalogInput") Integer detailId) {
+                                        @RequestParam("detailIdInCatalogInput") Integer detailId) {
 
         DetailCatalogDto detailCatalogDto = new DetailCatalogDto.Builder(name)
                 .setPrice(price)
@@ -127,13 +120,25 @@ public class DetailCatalogController extends CommonInitSessionControler {
     }
 
     @RequestMapping(value = "/editDetailInCatalog/{detailId}", method = RequestMethod.GET)
-    public ModelAndView editCatalogMarkGet(ModelMap model, @PathVariable Integer  detailId) {
+    public ModelAndView editCatalogMarkGet(ModelMap model, @PathVariable Integer detailId) {
         initSession(model);
         DetailCatalog detailById = detailCatalogService.getDetailById(detailId);
         if (detailById != null) {
             model.addAttribute("detailInCatalog", detailById);
         }
         return new ModelAndView("editDetailInCatalog", model);
+    }
+
+    @RequestMapping(value = "/filterByPrice", method = RequestMethod.POST)
+    public ModelAndView filterByMinMaxPrice(ModelMap model, @RequestParam("minPrice") Integer minPrice, @RequestParam("maxPrice") Integer maxPrice) {
+        initSession(model);
+        List<DetailCatalog> detailsToShow = detailCatalogService.getListOfAllDetailCatalogElementsFilteredByPrices(minPrice,maxPrice);
+        return goToCatalogWithDetails(model, detailsToShow);
+    }
+
+    private ModelAndView goToCatalogWithDetails(ModelMap model, List<DetailCatalog> detailsToShow) {
+        model.addAttribute("catalog", detailsToShow);
+        return new ModelAndView("catalog", model);
     }
 
 }

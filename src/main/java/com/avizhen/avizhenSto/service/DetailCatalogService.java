@@ -11,6 +11,8 @@ import java.util.List;
 public interface DetailCatalogService {
     List<DetailCatalog> getListOfAllDetailCatalogElements();
 
+    List<DetailCatalog> getListOfAllDetailCatalogElementsFilteredByPrices(Integer minPrice,Integer maxPrice);
+
     List<DetailCatalog> getDetailsByIds(List<Integer> detailIds);
 
 

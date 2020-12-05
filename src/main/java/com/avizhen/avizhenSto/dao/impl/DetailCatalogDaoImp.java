@@ -22,7 +22,7 @@ public class DetailCatalogDaoImp extends AbstractDao implements DetailCatalogDao
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<DetailCatalog> findAllCarts() {
+    public List<DetailCatalog> findAllDetails() {
         Criteria criteria = getSession().createCriteria(DetailCatalog.class);
         return (List<DetailCatalog>) criteria.list();
     }
