@@ -76,6 +76,7 @@ public class UserController extends CommonInitSessionControler {
                 .build();
 
         try {
+            //security feature test
             userService.registerClient(userRegistrationDto);
             model.addAttribute("msg", "User was created");
         } catch (InvalidRegistrationException e) {
